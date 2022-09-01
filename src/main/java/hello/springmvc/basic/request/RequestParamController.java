@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -53,5 +54,33 @@ public class RequestParamController {
         return "ok";
     }
 
+    @RequestMapping("/request-param-required")
+    @ResponseBody
+    public String requestParamRequired(
+            @RequestParam(required = false) String username,
+            @RequestParam(required = true) int age // int 는 Null이 존재하지 않는다. (원래)
+            //추가적으로 ""와 Null은 다르다.
+    ){
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+    @RequestMapping("/request-param-default")
+    @ResponseBody
+    public String requestParamDefault(
+            @RequestParam(required = true, defaultValue = "guest") String username,
+            @RequestParam(required = false, defaultValue = "-1") int age
+            //default는 이미 기본값이 존재하기에 required가 필요가 없다.
+    ){
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+    @RequestMapping("/request-param-map")
+    @ResponseBody
+    public String requestParamMap(@RequestParam Map<String, Object> paramMap){
+        log.info("username={}, age={}", paramMap.get("username"), paramMap.get("age"));
+        return "ok";
+    }
 
 }
