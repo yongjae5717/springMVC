@@ -33,4 +33,25 @@ public class RequestParamController {
         return "ok";
     }
 
+    @RequestMapping("/request-param-v3")
+    @ResponseBody
+    public String requestParamV3(
+            @RequestParam String username,
+            @RequestParam int age
+    ){
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+    @RequestMapping("/request-param-v4")
+    @ResponseBody
+    public String requestParamV4(
+            String username,
+            int age
+    ){
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+
 }
