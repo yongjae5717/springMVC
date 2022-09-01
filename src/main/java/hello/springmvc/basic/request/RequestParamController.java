@@ -100,7 +100,7 @@ public class RequestParamController {
 
     @RequestMapping("/model-attribute-v2")
     @ResponseBody
-    public String modelAttributeV2(@ModelAttribute HelloData helloData){
+    public String modelAttributeV2(HelloData helloData){
         log.info(helloData.toString());
         return "ok";
     }
